@@ -21,7 +21,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <section className="kanban-board">
+      <section className="expense-list">
         <Provider store={store}>
           <BrowserRouter>
             <section>

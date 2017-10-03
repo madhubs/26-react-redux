@@ -100,3 +100,6 @@ Provider
   * `onClick` the category should be removed from the application state
 * should display a `CategoryForm`
   * `onComplete` the form should update the component in the application state
+
+#### Collaborators
+Isaac, Gavin, Isaiah, Michelle, Said

@@ -5,20 +5,29 @@
 // * should support an optional `category` prop that will initialize the state of the form
 
 
+// `id` - a unique identifier
+// * `timestamp` - a date from when the category was created
+// * `name` - a string that is the name of the category
+// * `budget` - a number that is the total amount of money in the category
+
+
 import React from 'react';
 
 class CategoryForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: props.cateogry ? props.category.title : '',
+      id: props.category ? props.category.null : '',
+      timestamp: props.category ? props.category.timestamp : '',
+      title: props.category ? props.category.title : '',
+      budget: props.category ? props.category.budget : '',
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(e) {
-    this.setState ({ title: e.target.value });
+    this.setState ({[e.target.name]: e.target.value }); //this will now set state for each category
   }
 
   handleSubmit(e) {
@@ -29,12 +38,13 @@ class CategoryForm extends React.Component {
   render() {
     return (
       <form className="category-form" onSubmit={this.handleSubmit}>
-      <input
-      type="text"
-      name="title"
-      placeholder="enter a title"
-      value={this.state.title}
-      onChange={this.handleChange}/>
+        <h4>{this.props.buttonText}</h4>
+        <input
+        type="text"
+        name="title"
+        placeholder="enter a title"
+        value={this.state.title}
+        onChange={this.handleChange}/>
 
       <button type="submit">{this.props.buttonText}</button>
       </form>

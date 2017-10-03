@@ -32,23 +32,27 @@ class DashboardContainer extends React.Component {
 
 
         <CategoryForm
-          buttonText="create category"
-          onComplete={this.props.categoryCreate}/>
-          <ul className="categoryList">
-        {this.props.categories.length ?
-          <div>
-            {this.props.categories.map(item => {
-              return <div key={item.id}>
-                <h3>{item.title}</h3></div>;
-            })}
-          </div> :
-          <h2>Add some categories</h2>
-        }
-        </ul>
-      </main>
+           buttonText='create expense'
+           onComplete={this.props.categoryCreate} />
+         <ul className="categoryList">
+           {this.props.categories.map((item) => {
+             console.log(item);
+             return (
+               <CategoryItem
+                 key={item.id}
+                 category={item}
+                 categoryDelete={this.props.categoryDelete}
+                 categoryUpdate={this.props.categoryUpdate}
+               />
+             );
+           }
+           )}
+         </ul>
+       </main>
     );
   }
 }
+
 
 const mapStateToProps = state => {
   return {

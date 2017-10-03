@@ -1,12 +1,14 @@
 ![cf](https://i.imgur.com/7v5ASc8.png) 26: React & Redux
 ======
 #### Documentation
+This is an budget app meant to help keep track of expenses (i.e. car, health, groceries, etc.).
+We are using the following tools:
+React- a javaScript library for building user interfaces
+Redux- used for handling the state within an app
+Babelrc- a compiler for using ES6
+webpack- used to bundle our assets
 
-By using...
-Babelrc (a compiler for using ES6)
-webpack (used to bundle our assets)
-
-in terminal:
+To confirm things are working in chrome, type this in terminal:
 ```
 npm run watch
 ```

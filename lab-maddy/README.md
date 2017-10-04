@@ -13,7 +13,6 @@ To confirm things are working in chrome, type this in terminal:
 npm run watch
 ```
 
-
 ## Learning Objectives
 * We will be able to use redux with react
 * We will be able to design redux reducers for controlling application state
@@ -52,9 +51,14 @@ npm run watch
 
 ###### store
 * in `lib/store.js` export a function that will return a new redux store from your category reducer
+```
+export default () => createStore(reducer);
+```
 
 ##### Components
 * create the following component and structure it according to the diagram below:
+
+My eventual structure:
 ```
 src directory
 
@@ -71,6 +75,7 @@ src directory
     category.js
 
 ```
+Original readme structure:
 ```
 Provider
   App  

@@ -11,8 +11,8 @@ import './dashboard-container.scss';
 import {connect} from 'react-redux';
 import {
   categoryCreate,
-  categoryUpdate,
-  categoryDelete,
+  categoryUpdate,//can delete
+  categoryDelete,//can delete
 } from '../../action/category-actions';
 import CategoryForm from '../category-form';
 import CategoryItem from '../category-item';

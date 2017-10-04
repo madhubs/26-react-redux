@@ -17,8 +17,8 @@ class CategoryForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: props.category ? props.category.null : '',
-      timestamp: props.category ? props.category.timestamp : '',
+      id: props.category ? props.category.null : '',//
+      timestamp: props.category ? props.category.timestamp : '', //
       title: props.category ? props.category.title : '',
       budget: props.category ? props.category.budget : '',
     };
@@ -33,6 +33,7 @@ class CategoryForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.onComplete(Object.assign({}, this.state));
+    this.setState({title: ''}); //resets text field to blank after you update, might have to delete something above as well...
   }
 
   render() {

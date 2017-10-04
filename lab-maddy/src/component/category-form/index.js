@@ -41,6 +41,7 @@ class CategoryForm extends React.Component {
       <form className="category-form" onSubmit={this.handleSubmit}>
         <h4>{this.props.buttonText}</h4>
         <input
+        required
         type="text"
         name="title"
         placeholder="enter a category"

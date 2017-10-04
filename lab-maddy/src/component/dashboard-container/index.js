@@ -4,11 +4,9 @@
 // * should display a `CategoryForm` for adding categories to the application state
 // * should display a `CategoryItem` for each category in the application state
 
-
-
 import React from 'react';
 import './dashboard-container.scss';
-import {connect} from 'react-redux';
+import {connect} from 'react-redux'; //importing a binding ({connect}) of react-redux called react-redux. The react bindings. Grabbing state and dispatching.
 import {
   categoryCreate,
   categoryUpdate,//can delete, BUT by getting rid of update and delete no functionality will rendor
@@ -68,4 +66,4 @@ const mapDispatchToProps = (dispatch, getState) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);//Currying. binds the first two arguments with the third. This is currying. 1st- state 2nd- dipatch and getState 3rd- . Bind methods.

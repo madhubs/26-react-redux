@@ -8,7 +8,7 @@ const store = createAppStore();
 
 class App extends React.Component {
   constructor(props) {
-    super(props);
+    super(props); //don't need anymore
   }
 
   componentDidMount() {

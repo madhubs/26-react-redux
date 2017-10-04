@@ -1,53 +1,38 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {categoryCreate} from '../../action/category-actions'
 import CategoryForm from '../category-form'
-import CategoryItem from '../category-item'
+import {categoryUpdate, categoryDelete} from '../../action/category-actions'
 
-class DashboardContainer extends React.Component {
-  componentDidMount() {
-    console.log('__DASHBOARD__', this)
-    this.props.categoryCreate({title: 'Star Wars'})
-    this.props.categoryCreate({title: 'Dune'})
-    this.props.categoryCreate({title: 'Star Trek'})
+class CategoryItem extends React.Component {
+  constructor(props) {
+    super(props)
   }
 
   render() {
     return (
-      <main className="main-content">
-        <h2>Dashboard</h2>
-
+      <div className="category-item">
+        <button onClick={() => this.props.categoryDelete(this.props.category)}>X</button>
+        <h3>{this.props.category.title}</h3>
         <CategoryForm
-          buttonText="create"
-          onComplete={this.props.categoryCreate}/>
+          buttonText="update"
+          onComplete={this.props.categoryUpdate}
+          category={this.props.category}/>
 
-        {this.props.categories.length ?
           <div>
-            {this.props.categories.map(item => {
-              return <CategoryItem
-                        key={item.id}
-                        category={item}/>
-            })}
-          </div> :
-          <h2>Add some categories</h2>
-        }
-      </main>
+            {/* this is where we would have a CardItem with CardForm */}
+          </div>
+      </div>
     )
   }
 }
 
-const mapDispatchToProps = (dispatch, getState) => {
+let mapStateToProps = () => ({})
+
+let mapDispatchToProps = (dispatch, getState) => {
   return {
-    categoryCreate: category => dispatch(categoryCreate(category)),
     categoryUpdate: category => dispatch(categoryUpdate(category)),
-    categoryUpdate: category => dispatch(categoryDelete(category)),
+    categoryDelete: category => dispatch(categoryDelete(category)),
   }
 }
 
-const mapDispatchToProps = (dispatch, getState) => {
-  return {
-    categoryCreate: category => dispatch(categoryCreate(category)),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryItem)

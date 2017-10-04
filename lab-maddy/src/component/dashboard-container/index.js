@@ -11,7 +11,7 @@ import './dashboard-container.scss';
 import {connect} from 'react-redux';
 import {
   categoryCreate,
-  categoryUpdate,//can delete BUT GETTING rid of these looses functionality and no functionality rendors
+  categoryUpdate,//can delete, BUT by getting rid of update and delete no functionality will rendor
   categoryDelete,//can delete
 } from '../../action/category-actions';
 import CategoryForm from '../category-form';

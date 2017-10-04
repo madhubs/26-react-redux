@@ -1,7 +1,7 @@
 
 import React from 'react';
-import CategoryForm from '../category-form';
 import {connect} from 'react-redux';
+import CategoryForm from '../category-form';
 import {categoryUpdate, categoryDelete} from '../../action/category-actions';
 
 
@@ -15,6 +15,7 @@ class CategoryItem extends React.Component {
       <div className="category-item">
         <button onClick={() =>
         this.props.categoryDelete(this.props.category)}>delete</button>
+        <h3>{this.props.category.title}</h3>
         <h3>budget: {this.props.category.budget}</h3>
         <CategoryForm
           buttonText='update expense'
@@ -26,9 +27,17 @@ class CategoryItem extends React.Component {
   }
 }
 
-let mapDispatchToProps = state => {
+let mapStateToProps = state => {
   return {
-    categoryUpdate: state,
+    categories: state,
+  };
+};
+
+let mapDispatchToProps = (dispatch, getState) => {
+  return {
+    categoryUpdate: category => dispatch(categoryUpdate(category)),
+    categoryDelete: category => dispatch(categoryDelete(category)),
+
   };
 };
 

@@ -21,6 +21,10 @@ class CategoryItem extends React.Component {
           buttonText="update expense"
           onComplete={this.props.categoryUpdate}
           category={this.props.category}/>
+
+          <div>
+
+          </div>
         </div>
     );
   }

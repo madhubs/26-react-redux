@@ -7,7 +7,7 @@ export default (state=initialState, action) => {
   switch(type) {
   case 'CATEGORY_CREATE': return {...state, [payload.id]:[]};
   case 'CATEGORY_DELETE': return {...state, [payload.id]: null};
-  case 'CATEGORY_CREATE':
+  case 'CARD_CREATE':
     categoryId = payload.categoryId;
     categoryCards = state[categoryId];
     return {...state, [categoryId]: [...categoryCards, payload]};

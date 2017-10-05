@@ -1,38 +1,37 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import CategoryForm from '../category-form'
-import {categoryUpdate, categoryDelete} from '../../action/category-actions'
+let initialState = {}
 
-class CategoryItem extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+export default (state=initialState, action) => {
+  let {type, payload} = action
+  let categoryId, categoryCards
 
-  render() {
-    return (
-      <div className="category-item">
-        <button onClick={() => this.props.categoryDelete(this.props.category)}>X</button>
-        <h3>{this.props.category.title}</h3>
-        <CategoryForm
-          buttonText="update"
-          onComplete={this.props.categoryUpdate}
-          category={this.props.category}/>
+  switch(type) {
+    case 'CATEGORY_CREATE': return {...state, [payload.id]: []}
+    case 'CATEGORY_DELETE': return {...state, [payload.id]: null}
+    case 'CARD_CREATE':
+      categoryId = payload.categoryId
+      categoryCards = state[categoryId]
+      return {...state, [categoryId]: [...categoryCards, payload]}
+    case 'CARD_UPDATE':
+      let updateState = state
+      categoryId = payload.categoryId
+      updateState[categoryId] = updateState[categoryId].map(card => {
+        if(card.id === payload.id) card = payload
+        return card
+      })
+      return {...updateState}
 
-          <div>
-            {/* this is where we would have a CardItem with CardForm */}
-          </div>
-      </div>
-    )
-  }
-}
-
-let mapStateToProps = () => ({})
-
-let mapDispatchToProps = (dispatch, getState) => {
-  return {
-    categoryUpdate: category => dispatch(categoryUpdate(category)),
-    categoryDelete: category => dispatch(categoryDelete(category)),
+    case 'CARD_DELETE':
+      return
+    default: return state
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryItem)
+// previous redux store => [Category {id, title,...}]
+
+// redux store => {
+//   categories: [{id: 123, title, timestamp}, {id: 456, title, timestamp}], // This is done in the category reducer
+//   cards: {
+//     123: [{...}, {...}], // this is done in the card reducer
+//     456: [{...}]
+//   }
+// }

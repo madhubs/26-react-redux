@@ -8,7 +8,7 @@ Redux- used for handling the state within an app
 Babelrc- a compiler for using ES6
 webpack- used to bundle our assets
 
-To confirm things are working in chrome, type this in terminal:
+To confirm things are rendering in the chrome browser, type this in terminal:
 ```
 npm run watch
 ```
@@ -116,24 +116,13 @@ ____________________________________________________________________________
 ======
 
 #### Documentation
-- we don't need props anymore because 
+- We don't need props anymore because
 -
 
 ## Learning Objectives
-* students will be able to combine reducers to simplify the management of complex application states
-* students will continue to work with the fundamental principles of redux to gain a better understanding on state management
+* We will be able to combine reducers to simplify the management of complex application states
+* We will continue to work with the fundamental principles of redux to gain a better understanding on state management
 
-## Requirements
-#### Configuration  
-* `README.md`
-* `.babelrc`
-* `.gitignore`
-* `package.json`
-* `webpack.config.js`
-* `src/**`
-* `src/main.js`
-* `src/style`
-* `src/style/main.scss`
 
 #### Feature Tasks
 ##### Expense
@@ -194,3 +183,31 @@ App
 * should have a button that will delete the expense from the appState `onClick`
 * should display the `name` and `price` of the component
 * should display an `ExpenseForm` that will enable the user to update the expense in the app state
+
+#### Common Errors during refactoring
+
+Problem:
+Within terminal after npm run watch.
+```
+ERROR in ./src/reducer/card.js
+Module build failed: SyntaxError: Unexpected token (8:34)
+
+   6 |
+   7 |   switch(type) {
+>  8 |   case 'CATEGORY_CREATE': return {...state, [payload.id]:[]};
+     |                                   ^
+   9 |   case 'CATEGORY_DELETE': return {...state, [payload.id]: null};
+  10 |
+  11 |   case 'CARD_CREATE':
+```
+Solution:
+I updated my .Babelrc file to include the rest-spread plugin:
+```
+{
+  "presets": ["es2015", "react"],
+  "plugins": ["transform-object-rest-spread"]
+}
+```
+
+#### Collaborators
+____________________________________________________________________________

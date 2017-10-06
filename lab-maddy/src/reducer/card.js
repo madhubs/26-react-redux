@@ -9,9 +9,8 @@ export default (state=initialState, action) => {
   case 'CATEGORY_DELETE': return {...state, [payload.id]: null};
 
   case 'CARD_CREATE':
-    categoryId = payload.categoryId;
-    categoryCards = state[categoryId];
-    return {...state, [categoryId]: [...categoryCards, payload]};
+    let categoryCards = state[payload.categoryId]
+    return {...state, [payload.categoryId]: [...categoryCards, payload]};
 
   case 'CARD_UPDATE':
     let updateState = state; //caching the state in updatestate becuase you can't mutate state
@@ -22,7 +21,9 @@ export default (state=initialState, action) => {
     return {...updateState};
 
   case 'CARD_DELETE':
-    return;
+    let deleteState = state;
+    deleteState[payload.categoryId] = deleteState[payload.categoryId].filter(card => card.id !== payload.id);
+    return {...deleteState};
   default: return state;
 
   }

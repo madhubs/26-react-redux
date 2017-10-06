@@ -1,53 +1,86 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {categoryCreate} from '../../action/category-actions'
+import CardItem from '../card-item'
+import CardForm from '../card-form'
 import CategoryForm from '../category-form'
-import CategoryItem from '../category-item'
+import {cardCreate} from '../../action/card-actions'
+import {categoryUpdate, categoryDelete} from '../../action/category-actions'
 
-class DashboardContainer extends React.Component {
-  componentDidMount() {
-    console.log('__DASHBOARD__', this)
-    this.props.categoryCreate({title: 'Star Wars'})
-    this.props.categoryCreate({title: 'Dune'})
-    this.props.categoryCreate({title: 'Star Trek'})
+class CategoryItem extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      cardForm: false,
+      categoryForm: false,
+    }
+
+    this.toggleCard = this.toggleCard.bind(this)
+    this.toggleCategory = this.toggleCategory.bind(this)
+  }
+
+  toggleCard() {
+    this.setState({cardForm: !this.state.cardForm})
+  }
+
+  toggleCategory() {
+    this.setState({categoryForm: !this.state.categoryForm})
+  }
+
+  componentDidUpdate() {
+    console.log('scott was here')
   }
 
   render() {
     return (
-      <main className="main-content">
-        <h2>Dashboard</h2>
+      <div className="category-item">
+        <div className="content-container">
+          <button className="remove" onClick={() => this.props.categoryDelete(this.props.category)}>X</button>
+          <button onClick={this.toggleCategory}>edit category</button>
+          <button onClick={this.toggleCard}>new card</button>
+          <h3>{this.props.category.title}</h3>
 
-        <CategoryForm
-          buttonText="create"
-          onComplete={this.props.categoryCreate}/>
+          {this.state.categoryForm ?
+            <CategoryForm
+              buttonText="update"
+              onComplete={this.props.categoryUpdate}
+              category={this.props.category}
+              toggle={this.toggleCategory}/> :
+            undefined
+          }
+        </div>
+        <div className="content-container">
+          {this.state.cardForm ?
+            <CardForm
+              buttonText="create"
+              categoryId={this.props.category.id}
+              onComplete={this.props.cardCreate}
+              toggle={this.toggleCard}/> :
+            undefined
+          }
 
-        {this.props.categories.length ?
-          <div>
-            {this.props.categories.map(item => {
-              return <CategoryItem
-                        key={item.id}
-                        category={item}/>
-            })}
-          </div> :
-          <h2>Add some categories</h2>
-        }
-      </main>
+          {this.props.cards[this.props.category.id].length ?
+            this.props.cards[this.props.category.id].map(card => <CardItem key={card.id} card={card}/>)
+            :
+            <h3>currently no cards</h3>
+          }
+        </div>
+      </div>
     )
   }
 }
 
-const mapDispatchToProps = (dispatch, getState) => {
+let mapStateToProps = state => {
   return {
-    categoryCreate: category => dispatch(categoryCreate(category)),
+    cards: state.cards,
+  }
+}
+
+let mapDispatchToProps = (dispatch, getState) => {
+  return {
     categoryUpdate: category => dispatch(categoryUpdate(category)),
-    categoryUpdate: category => dispatch(categoryDelete(category)),
+    categoryDelete: category => dispatch(categoryDelete(category)),
+    cardCreate: card => dispatch(cardCreate(card)),
   }
 }
 
-const mapDispatchToProps = (dispatch, getState) => {
-  return {
-    categoryCreate: category => dispatch(categoryCreate(category)),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryItem)

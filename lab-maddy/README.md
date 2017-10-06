@@ -115,11 +115,9 @@ ____________________________________________________________________________
 ![cf](https://i.imgur.com/7v5ASc8.png) 27: Combining Reducers
 ======
 
-## Submission Instructions
-* continue working on the fork you created from lab 26
-* open a **new branch** for today's assignment
-* upon completion, create a **new pull request** in github
-* submit a link to your PR in canvas
+#### Documentation
+- we don't need props anymore because 
+-
 
 ## Learning Objectives
 * students will be able to combine reducers to simplify the management of complex application states

@@ -1,5 +1,5 @@
 import {createStore} from 'redux'; //requiring in one piece of the redux package
-import reducer from '../reducer/category';//the reducer (category) is passed into the store
+import reducer from '../reducer';//the reducer (category) is passed into the store
 
 export default () => createStore(reducer);
 

@@ -4,16 +4,10 @@
 // * should display a `CategoryForm` for adding categories to the application state
 // * should display a `CategoryItem` for each category in the application state
 
-
-
 import React from 'react';
 import './dashboard-container.scss';
-import {connect} from 'react-redux';
-import {
-  categoryCreate,
-  categoryUpdate,//can delete, BUT by getting rid of update and delete no functionality will rendor
-  categoryDelete,//can delete
-} from '../../action/category-actions';
+import {connect} from 'react-redux'; //importing a binding ({connect}) of react-redux called react-redux. The react bindings. Grabbing state and dispatching.
+import {categoryCreate} from '../../action/category-actions';
 import CategoryForm from '../category-form';
 import CategoryItem from '../category-item';
 
@@ -30,24 +24,20 @@ class DashboardContainer extends React.Component {
       <main className="main-content">
         <h2>Expense Tracker</h2>
 
-
         <CategoryForm
            buttonText='create expense'
-           onComplete={this.props.categoryCreate} />
-         <ul className="categoryList">
-           {this.props.categories.map((item) => {
-             console.log(item);
-             return (
-               <CategoryItem
-                 key={item.id}
-                 category={item}
-                 categoryDelete={this.props.categoryDelete}
-                 categoryUpdate={this.props.categoryUpdate}
-               />
-             );
-           }
-           )}
-         </ul>
+           onComplete={this.props.categoryCreate}/>
+
+         {this.props.categories.length ?
+           <div>
+            {this.props.categories.map(item => {
+              return <CategoryItem
+                       key={item.id}
+                       category={item}/>;
+            })}
+         </div> :
+         <h2>Add some categories</h2>
+       }
        </main>
     );
   }
@@ -56,16 +46,17 @@ class DashboardContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    categories: state,
+    categories: state.categories,
+    cards: state.cards,
   };
 };
 
 const mapDispatchToProps = (dispatch, getState) => {
   return {
     categoryCreate: category => dispatch(categoryCreate(category)),
-    categoryUpdate: category => dispatch(categoryUpdate(category)),
-    categoryDelete: category => dispatch(categoryDelete(category)),
+    // categoryUpdate: category => dispatch(categoryUpdate(category)),
+    // categoryDelete: category => dispatch(categoryDelete(category)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);//Currying. binds the first two arguments with the third. This is currying. 1st- state 2nd- dipatch and getState 3rd- . Bind methods.

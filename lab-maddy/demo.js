@@ -1,37 +1,86 @@
-let initialState = {}
+import React from 'react'
+import {connect} from 'react-redux'
+import CardItem from '../card-item'
+import CardForm from '../card-form'
+import CategoryForm from '../category-form'
+import {cardCreate} from '../../action/card-actions'
+import {categoryUpdate, categoryDelete} from '../../action/category-actions'
 
-export default (state=initialState, action) => {
-  let {type, payload} = action
-  let categoryId, categoryCards
+class CategoryItem extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      cardForm: false,
+      categoryForm: false,
+    }
 
-  switch(type) {
-    case 'CATEGORY_CREATE': return {...state, [payload.id]: []}
-    case 'CATEGORY_DELETE': return {...state, [payload.id]: null}
-    case 'CARD_CREATE':
-      categoryId = payload.categoryId
-      categoryCards = state[categoryId]
-      return {...state, [categoryId]: [...categoryCards, payload]}
-    case 'CARD_UPDATE':
-      let updateState = state
-      categoryId = payload.categoryId
-      updateState[categoryId] = updateState[categoryId].map(card => {
-        if(card.id === payload.id) card = payload
-        return card
-      })
-      return {...updateState}
+    this.toggleCard = this.toggleCard.bind(this)
+    this.toggleCategory = this.toggleCategory.bind(this)
+  }
 
-    case 'CARD_DELETE':
-      return
-    default: return state
+  toggleCard() {
+    this.setState({cardForm: !this.state.cardForm})
+  }
+
+  toggleCategory() {
+    this.setState({categoryForm: !this.state.categoryForm})
+  }
+
+  componentDidUpdate() {
+    console.log('scott was here')
+  }
+
+  render() {
+    return (
+      <div className="category-item">
+        <div className="content-container">
+          <button className="remove" onClick={() => this.props.categoryDelete(this.props.category)}>X</button>
+          <button onClick={this.toggleCategory}>edit category</button>
+          <button onClick={this.toggleCard}>new card</button>
+          <h3>{this.props.category.title}</h3>
+
+          {this.state.categoryForm ?
+            <CategoryForm
+              buttonText="update"
+              onComplete={this.props.categoryUpdate}
+              category={this.props.category}
+              toggle={this.toggleCategory}/> :
+            undefined
+          }
+        </div>
+        <div className="content-container">
+          {this.state.cardForm ?
+            <CardForm
+              buttonText="create"
+              categoryId={this.props.category.id}
+              onComplete={this.props.cardCreate}
+              toggle={this.toggleCard}/> :
+            undefined
+          }
+
+          {this.props.cards[this.props.category.id].length ?
+            this.props.cards[this.props.category.id].map(card => <CardItem key={card.id} card={card}/>)
+            :
+            <h3>currently no cards</h3>
+          }
+        </div>
+      </div>
+    )
   }
 }
 
-// previous redux store => [Category {id, title,...}]
+let mapStateToProps = state => {
+  return {
+    cards: state.cards,
+  }
+}
 
-// redux store => {
-//   categories: [{id: 123, title, timestamp}, {id: 456, title, timestamp}], // This is done in the category reducer
-//   cards: {
-//     123: [{...}, {...}], // this is done in the card reducer
-//     456: [{...}]
-//   }
-// }
+let mapDispatchToProps = (dispatch, getState) => {
+  return {
+    categoryUpdate: category => dispatch(categoryUpdate(category)),
+    categoryDelete: category => dispatch(categoryDelete(category)),
+    cardCreate: card => dispatch(cardCreate(card)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryItem)

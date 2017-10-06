@@ -7,13 +7,15 @@ export default (state=initialState, action) => {
   switch(type) {
   case 'CATEGORY_CREATE': return {...state, [payload.id]:[]};
   case 'CATEGORY_DELETE': return {...state, [payload.id]: null};
+
   case 'CARD_CREATE':
     categoryId = payload.categoryId;
     categoryCards = state[categoryId];
     return {...state, [categoryId]: [...categoryCards, payload]};
+
   case 'CARD_UPDATE':
     let updateState = state; //caching the state in updatestate becuase you can't mutate state
-    updateState[categoryId] = updateState[categoryId].map(card  =>{
+    updateState[payload.categoryId] = updateState[payload.categoryId].map(card  =>{
       if(card.id === payload.id) card = payload; //payload is our update, once that === validation is done, we overwrite the card.
       return card;
     });

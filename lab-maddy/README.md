@@ -8,7 +8,7 @@ Redux- used for handling the state within an app
 Babelrc- a compiler for using ES6
 webpack- used to bundle our assets
 
-To confirm things are working in chrome, type this in terminal:
+To confirm things are rendering in the chrome browser, type this in terminal:
 ```
 npm run watch
 ```
@@ -116,12 +116,12 @@ ____________________________________________________________________________
 ======
 
 #### Documentation
-- we don't need props anymore because
+- We don't need props anymore because
 -
 
 ## Learning Objectives
-* students will be able to combine reducers to simplify the management of complex application states
-* students will continue to work with the fundamental principles of redux to gain a better understanding on state management
+* We will be able to combine reducers to simplify the management of complex application states
+* We will continue to work with the fundamental principles of redux to gain a better understanding on state management
 
 
 #### Feature Tasks
@@ -201,7 +201,7 @@ Module build failed: SyntaxError: Unexpected token (8:34)
   11 |   case 'CARD_CREATE':
 ```
 Solution:
-Updating my .Babelrc file to include the rest-spread plugin:
+I updated my .Babelrc file to include the rest-spread plugin:
 ```
 {
   "presets": ["es2015", "react"],

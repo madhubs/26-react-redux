@@ -232,7 +232,17 @@ this.props.onComplete is not a function
 ```
 Solution:
 
+Problem:
+The following chrome console error:
+```
+index.js:62 Uncaught TypeError: Cannot read property '8159c12d-abcb-4f50-adb1-fdf7f14697f8' of undefined
+```
 
 
 #### Collaborators
 ____________________________________________________________________________
+
+
+
+big changes:
+src/reducer/card.js- adding validation

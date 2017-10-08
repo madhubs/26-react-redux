@@ -1,35 +1,40 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import CardForm from '../expense-form';
-import {cardUpdate, cardDelete} from '../../action/card-actions';
+import ExpenseForm from '../expense-form';
+import {expenseUpdate, expenseDelete} from '../../action/expense-actions';
+//need to import any scss
 
-class CardItem extends React.Component {
+class ExpenseItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editCard: false,
+      editExpense: false,
     };
-    this.toggleCard = this.toggleCard.bind(this);
+    this.toggleExpense = this.toggleExpense.bind(this);
   }
 
-  toggleCard() {
-    this.setState({editCard: !this.state.editCard});
+  toggleExpense() {
+    this.setState({editExpense: !this.state.editExpense});
   }
 
   render(){
     return (
-      <section className="card-item" id={this.props.card.id}>
-        <button className="remove" onClick={() => this.props.cardDelete(this.props.card)}>x</button>
-        <button onClick={this.toggleCard}>edit card</button>
-        <h2>{this.props.card.title}</h2>
-        <p>{this.props.card.content}</p>
+      <section className="expense-item" id={this.props.expense.id}> //maybe don't need id anymore
+        <div className="expense-content">
+          <h2>{this.props.expense.title}</h2><br/>
+          <p>{this.props.expense.price}</p><br/>//changed from content to price
+          <button className="remove" onClick={() => this.props.expenseDelete(this.props.expense)}>x</button>
+          <button onClick={this.toggleCard}>edit expense</button>
+        </div>
 
         {this.state.editCard ?
           <CardForm
             buttonText="update"
             toggle={this.toggleCard}
-            onComplete={this.props.cardUpdate}
-            card={this.props.card}/>
+            onComplete={this.props.expenseUpdate}
+            id={this.props.expense.id}
+            categoryId={this.props.expense.categoryId}
+            expense={this.props.expense}/>
           :
           undefined
         }
@@ -41,10 +46,10 @@ class CardItem extends React.Component {
 let mapStateToProps = () => ({});
 let mapDispatchToProps = (dispatch, getState) => {
   return {
-    cardUpdate: card => dispatch(cardUpdate(card)),
-    cardDelete: card => dispatch(cardDelete(card)),
+    expenseUpdate: expense => dispatch(expenseUpdate(expense)),
+    expenseDelete: expense => dispatch(expenseDelete(expense)),
   };
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(CardItem);
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseItem);

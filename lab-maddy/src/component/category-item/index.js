@@ -1,25 +1,25 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import CardItem from '../expense-item';
-import CardForm from '../expense-form';
+import ExpenseItem from '../expense-item';
+import ExpenseForm from '../expense-form';
 import CategoryForm from '../category-form';
-import {cardCreate} from '../../action/card-actions';
+import {expenseCreate} from '../../action/expense-actions';
 import {categoryUpdate, categoryDelete} from '../../action/category-actions';
 
 class CategoryItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cardForm: false,
+      expenseForm: false,
       categoryForm: false,
     };
 
-    this.toggleCard = this.toggleCard.bind(this);
+    this.toggleExpense = this.toggleExpense.bind(this);
     this.toggleCategory = this.toggleCategory.bind(this);
   }
 
-  toggleCard() {
-    this.setState({cardForm: !this.state.cardForm});
+  toggleExpense() {
+    this.setState({expenseForm: !this.state.expenseForm});
   }
 
   toggleCategory() {
@@ -37,7 +37,7 @@ class CategoryItem extends React.Component {
         <div className="content-container">
           <button className="remove" onClick={() => this.props.categoryDelete(this.props.category)}>X</button>
           <button onClick={this.toggleCategory}>edit category</button>
-          <button onClick={this.toggleCard}>new card</button>
+          <button onClick={this.toggleExpense}>new expense</button>
           <h3>{this.props.category.title}</h3>
 
           {this.state.categoryForm ?
@@ -50,19 +50,19 @@ class CategoryItem extends React.Component {
           }
         </div>
         <div className="content-container">
-          {this.state.cardForm ?
-            <CardForm
+          {this.state.expenseForm ?
+            <ExpenseForm
               buttonText="create"
               categoryId={this.props.category.id}
-              onComplete={this.props.cardCreate}
+              onComplete={this.props.expenseCreate}
               toggle={this.toggleCard}/> :
             undefined
           }
 
-          {this.props.cards[this.props.category.id].length ?
-            this.props.cards[this.props.category.id].map(card => <CardItem key={card.id} card={card}/>)
+          {this.props.expense[this.props.category.id].length ?
+            this.props.expense[this.props.category.id].map(expense => <ExpenseItem key={expense.id} expense={expense}/>)
             :
-            <h3>currently no cards</h3>
+            <h3>currently no expenses</h3>
           }
         </div>
       </div>
@@ -72,7 +72,7 @@ class CategoryItem extends React.Component {
 
 let mapStateToProps = state => {
   return {
-    cards: state.cards,
+    expense: state.expense,
   };
 };
 

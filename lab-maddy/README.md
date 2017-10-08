@@ -116,7 +116,7 @@ ____________________________________________________________________________
 ======
 
 #### Documentation
-- We don't need props anymore because
+- We don't need props anymore because...
 -
 
 ## Learning Objectives

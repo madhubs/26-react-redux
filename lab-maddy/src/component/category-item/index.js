@@ -1,33 +1,33 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import CardItem from '../card-item'
-import CardForm from '../card-form'
-import CategoryForm from '../category-form'
-import {cardCreate} from '../../action/card-actions'
-import {categoryUpdate, categoryDelete} from '../../action/category-actions'
+import React from 'react';
+import {connect} from 'react-redux';
+import CardItem from '../expense-item';
+import CardForm from '../expense-form';
+import CategoryForm from '../category-form';
+import {cardCreate} from '../../action/card-actions';
+import {categoryUpdate, categoryDelete} from '../../action/category-actions';
 
 class CategoryItem extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       cardForm: false,
       categoryForm: false,
-    }
+    };
 
-    this.toggleCard = this.toggleCard.bind(this)
-    this.toggleCategory = this.toggleCategory.bind(this)
+    this.toggleCard = this.toggleCard.bind(this);
+    this.toggleCategory = this.toggleCategory.bind(this);
   }
 
   toggleCard() {
-    this.setState({cardForm: !this.state.cardForm})
+    this.setState({cardForm: !this.state.cardForm});
   }
 
   toggleCategory() {
-    this.setState({categoryForm: !this.state.categoryForm})
+    this.setState({categoryForm: !this.state.categoryForm});
   }
 
   componentDidUpdate() {
-    console.log('scott was here')
+
   }
 
 //render: category item- update and create.

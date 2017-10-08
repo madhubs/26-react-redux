@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import CardForm from '../card-form';
+import CardForm from '../expense-form';
 import {cardUpdate, cardDelete} from '../../action/card-actions';
 
 class CardItem extends React.Component {

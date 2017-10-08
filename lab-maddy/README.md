@@ -116,7 +116,7 @@ ____________________________________________________________________________
 ======
 
 #### Documentation
-- We don't need props anymore because
+- We don't need props anymore because...
 -
 
 ## Learning Objectives
@@ -187,7 +187,7 @@ App
 #### Common Errors during refactoring
 
 Problem:
-Within terminal after npm run watch.
+This error message within terminal after npm run watch.
 ```
 ERROR in ./src/reducer/card.js
 Module build failed: SyntaxError: Unexpected token (8:34)
@@ -209,5 +209,40 @@ I updated my .Babelrc file to include the rest-spread plugin:
 }
 ```
 
+Problem:
+My new card/new expense button was not rendering the new card/new expense form when clicked.
+
+Solution:
+Adding the following to my expense-form's index.js file:
+```
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.onComplete(this.state);
+    if(!this.props.expense) {
+      this.setState({ content: '' });
+    }
+  }
+  ```
+
+Problem:
+After hitting submit on the 'create' button for creating a new expense item I get the following error (along with two others) in chrome console:
+```
+this.props.onComplete is not a function
+```
+Solution:
+
+Problem:
+The following chrome console error:
+```
+index.js:62 Uncaught TypeError: Cannot read property '8159c12d-abcb-4f50-adb1-fdf7f14697f8' of undefined
+```
+
+
 #### Collaborators
 ____________________________________________________________________________
+
+
+
+big changes:
+src/reducer/card.js- adding validation

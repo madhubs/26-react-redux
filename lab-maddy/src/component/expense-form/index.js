@@ -1,14 +1,14 @@
 import React from 'react';
 
-class CardForm extends React.Component {
+class ExpenseForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      categoryId: props.card ? props.card.categoryId : props.categoryId,
-      id: props.card ? props.card.id : undefined,
-      timestamp: props.card ? props.card.timestamp : undefined,
-      title: props.card ? props.card.title : '',
-      content: props.card ? props.card.content : '',
+      title: props.expense ? props.expense.title : '',
+      price: props.expense ? props.expense.content : '',
+      categoryId: props.expense ? props.expense.categoryId : props.categoryId,
+      id: props.expense ? props.expense.id : undefined,
+      timestamp: props.expense ? props.expense.timestamp : undefined,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -21,10 +21,19 @@ class CardForm extends React.Component {
     });
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.onComplete(this.state);
+    if(!this.props.expense) {
+      this.setState({ content: '' });
+    }
+  }
+
+
   render() {
     return (
       <form
-        className="card-form"
+        className="expense-form"
         onSubmit={this.handleSubmit}>
         <input
           type="text"
@@ -46,4 +55,4 @@ class CardForm extends React.Component {
   }
 }
 
-export default CardForm;
+export default ExpenseForm;

@@ -8,10 +8,10 @@ import CategoryItem from '../category-item';
 
 class DashboardContainer extends React.Component {
   componentDidMount() {
-    console.log('__DASHBOARD__', this);
-    this.props.categoryCreate({title: 'groceries'});
-    this.props.categoryCreate({title: 'shoes'});
-    this.props.categoryCreate({title: 'stuff'});
+    // console.log('__DASHBOARD__', this);
+    // this.props.categoryCreate({title: 'groceries'});
+    // this.props.categoryCreate({title: 'shoes'});
+    // this.props.categoryCreate({title: 'stuff'});
   }
 
   render() {

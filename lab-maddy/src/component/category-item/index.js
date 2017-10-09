@@ -25,16 +25,16 @@ class CategoryItem extends React.Component {
   toggleCategory() {
     this.setState({categoryForm: !this.state.categoryForm});
   }
-
-  componentDidUpdate() {
-
-  }
+  //
+  // componentDidUpdate() {
+  //
+  // }
 
 //render: category item- update and create.
   render() {
     return (
       <div className="category-item">
-        <div className="content-container">
+        <div className="expense-container"> {/*this used to be content-container*/}
           <button className="remove" onClick={() => this.props.categoryDelete(this.props.category)}>X</button>
           <button onClick={this.toggleCategory}>edit category</button>
           <button onClick={this.toggleExpense}>new expense</button>
@@ -49,7 +49,7 @@ class CategoryItem extends React.Component {
             undefined
           }
         </div>
-        <div className="content-container">
+        <div className="expense-container">
           {this.state.expenseForm ?
             <ExpenseForm
               buttonText="create"
@@ -59,8 +59,8 @@ class CategoryItem extends React.Component {
             undefined
           }
 
-          {this.props.expense[this.props.category.id].length ?
-            this.props.expense[this.props.category.id].map(expense => <ExpenseItem key={expense.id} expense={expense}/>)
+          {this.props.expenses[this.props.category.id].length ?
+            this.props.expenses[this.props.category.id].map(expense => <ExpenseItem key={expense.id} expense={expense}/>)
             :
             <h3>currently no expenses</h3>
           }
@@ -72,7 +72,7 @@ class CategoryItem extends React.Component {
 
 let mapStateToProps = state => {
   return {
-    expense: state.expense,
+    expenses: state.expense,
   };
 };
 
@@ -80,6 +80,7 @@ let mapDispatchToProps = (dispatch, getState) => {
   return {
     categoryUpdate: category => dispatch(categoryUpdate(category)),
     categoryDelete: category => dispatch(categoryDelete(category)),
+    expenseCreate: expense => dispatch(expenseCreate(expense)),
   };
 };
 

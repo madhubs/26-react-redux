@@ -5,7 +5,7 @@ class ExpenseForm extends React.Component {
     super(props);
     this.state = {
       title: props.expense ? props.expense.title : '',
-      price: props.expense ? props.expense.content : '',
+      price: props.expense ? props.expense.price : '',
       categoryId: props.expense ? props.expense.categoryId : props.categoryId,
       id: props.expense ? props.expense.id : undefined,
       timestamp: props.expense ? props.expense.timestamp : undefined,
@@ -24,11 +24,8 @@ class ExpenseForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.onComplete(this.state);
-    if(!this.props.expense) {
-      this.setState({ content: '' });
-    }
+    this.props.toggle();
   }
-
 
   render() {
     return (
@@ -38,15 +35,15 @@ class ExpenseForm extends React.Component {
         <input
           type="text"
           name="title"
-          placeholder="enter a category for your expense"
+          placeholder="enter an expense"
           value={this.state.title}
           onChange={this.handleChange}/>
 
           <input
             type="text"
-            name="content"
-            placeholder="enter content for your expense"
-            value={this.state.content}
+            name="price"
+            placeholder="enter price for your expense"
+            value={this.state.price}
             onChange={this.handleChange}/>
 
           <button type="submit">{this.props.buttonText}</button>

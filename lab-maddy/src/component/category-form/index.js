@@ -27,9 +27,9 @@ class CategoryForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-ComponentDidMount(){
-  console.log('__FORM_PROPS__', this.props)
-}
+// ComponentDidMount(){
+//   console.log('__FORM_PROPS__', this.props)
+// }
 
   handleChange(e) {
     this.setState ({ title: e.target.value }); //this will now set state for each category. MAPS TO THE NAME="TITLE" BELOW

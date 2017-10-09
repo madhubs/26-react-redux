@@ -220,10 +220,11 @@ Adding the following to my expense-form's index.js file:
     e.preventDefault();
     this.props.onComplete(this.state);
     if(!this.props.expense) {
-      this.setState({ content: '' });
+      this.setState({ price: '' });
     }
   }
   ```
+
 
 Problem:
 After hitting submit on the 'create' button for creating a new expense item I get the following error (along with two others) in chrome console:
@@ -232,11 +233,20 @@ this.props.onComplete is not a function
 ```
 Solution:
 
+
 Problem:
 The following chrome console error:
+
+The following is the chrome console message before the error. This means that the new category I'm attempting to add is getting into the categories array, but can't be rendered:
+
+  ```__STATE__ {categories: Array(1), expenses: {…}}):
+  ```
+But then I see the error:
 ```
 index.js:62 Uncaught TypeError: Cannot read property '8159c12d-abcb-4f50-adb1-fdf7f14697f8' of undefined
 ```
+Solution:
+
 
 
 #### Collaborators

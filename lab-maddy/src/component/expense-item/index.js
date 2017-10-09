@@ -19,18 +19,18 @@ class ExpenseItem extends React.Component {
 
   render(){
     return (
-      <section className="expense-item" id={this.props.expense.id}> //maybe don't need id anymore
-        <div className="expense-content">
+      <section className="expense-item" id={this.props.expense.id}>
+        <div className="expense-price">
           <h2>{this.props.expense.title}</h2><br/>
-          <p>{this.props.expense.price}</p><br/>//changed from content to price
+          <p>{this.props.expense.price}</p><br/>
           <button className="remove" onClick={() => this.props.expenseDelete(this.props.expense)}>x</button>
-          <button onClick={this.toggleCard}>edit expense</button>
+          <button onClick={this.toggleExpense}>edit expense</button>
         </div>
 
-        {this.state.editCard ?
+        {this.state.editExpense ?
           <CardForm
             buttonText="update"
-            toggle={this.toggleCard}
+            toggle={this.toggleExpense}
             onComplete={this.props.expenseUpdate}
             id={this.props.expense.id}
             categoryId={this.props.expense.categoryId}

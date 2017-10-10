@@ -28,7 +28,7 @@ class ExpenseItem extends React.Component {
         </div>
 
         {this.state.editExpense ?
-          <CardForm
+          <ExpenseForm
             buttonText="update"
             toggle={this.toggleExpense}
             onComplete={this.props.expenseUpdate}

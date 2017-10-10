@@ -16,7 +16,7 @@ export const expenseUpdate = expense => {
   };
 };
 
-export const cardDelete = expense => {
+export const expenseDelete = expense => {
   return {
     type: 'EXPENSE_DELETE',
     payload: expense,

@@ -23,19 +23,19 @@ export default (state=initialState, action) => {
     return {...state, [payload.categoryId]: [...categoryExpenses, payload]};
   // default: return state;
 
-  case 'CARD_UPDATE':
+  case 'EXPENSE_UPDATE':
     expenseValidate(payload);
     let updateState = state;
-    updateState[payload.categoryId] = updateState[payload.categoryId].map(card => {
-      if(card.id === payload.id) card = payload;
-      return card;
+    updateState[payload.categoryId] = updateState[payload.categoryId].map(expense => {
+      if(expense.id === payload.id) expense = payload;
+      return expense;
     });
     return {...updateState};
 
-  case 'CARD_DELETE':
+  case 'EXPENSE_DELETE':
     expenseValidate(payload);
     let deleteState = state;
-    deleteState[payload.categoryId] = deleteState[payload.categoryId].filter(card => card.id !== payload.id);
+    deleteState[payload.categoryId] = deleteState[payload.categoryId].filter(expense => expense.id !== payload.id);
     return {...deleteState};
   default: return state;
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import './dashboard-container.scss';
 import {connect} from 'react-redux';
-import {categoryCreate} from '../../action/category-actions';
+import {categoryCreate, categoryUpdate, categoryDelete} from '../../action/category-actions';
 import CategoryForm from '../category-form';
 import CategoryItem from '../category-item';
 
@@ -14,7 +14,7 @@ class DashboardContainer extends React.Component {
   render() {
     return (
       <main className="main-content">
-        <h2>Dashboard</h2>
+        <h2>Budget Tracker 5000</h2>
 
         <CategoryForm
           buttonText="create"

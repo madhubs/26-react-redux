@@ -1,30 +1,30 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import CategoryForm from '../category-form';
-import {categoryUpdate, categoryDelete} from '../../action/category-actions';
 import ExpenseForm from '../expense-form';
 import ExpenseItem from '../expense-item';
-import { expenseCreate, expenseUpdate, expenseDelete } from '../../action/expense-actions.js';
+import CategoryForm from '../category-form';
+import {expenseCreate} from '../../action/expense-actions';
+import {categoryUpdate, categoryDelete} from '../../action/category-actions';
 
 class CategoryItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editCategory: false,
-      expenseBox: false,
+      expenseForm: false,
+      categoryForm: false,
     };
-    this.toggleCategory = this.toggleCategory.bind(this);
     this.toggleExpense = this.toggleExpense.bind(this);
-  }
-
-  toggleCategory(){
-    this.setState({editCategory: !this.state.editCategory});
+    this.toggleCategory = this.toggleCategory.bind(this);
   }
 
   toggleExpense(){
-    this.setState({editExpense: !this.state.editCategory});
-
+    this.setState({expenseForm: !this.state.expenseForm});
   }
+
+  toggleCategory(){
+    this.setState({categoryForm: !this.state.categoryForm});
+  }
+
 
 
   render() {
@@ -33,7 +33,7 @@ class CategoryItem extends React.Component {
         <div className="content-container">
           <button className="remove" onClick={() => this.props.categoryDelete(this.props.category)}>X</button>
           <button onClick={this.toggleCategory}>edit category</button>
-
+           <button onClick={this.toggleExpense}>new expense</button>
           <h3>{this.props.category.title}</h3>
 
           {this.state.categoryForm ?
@@ -45,13 +45,14 @@ class CategoryItem extends React.Component {
             undefined
           }
           </div>
-          <div className='expense-container'>
-            <ExpenseForm
-              categoryID={this.props.category.id}
-              buttonText='Create'
-              onComplete={this.props.expenseCreate}
-              toggle={this.toggleCard}/> :
-            undefined
+          <div className='content-container'>
+            {this.state.expenseForm ?
+              <ExpenseForm
+                buttonText='Create'
+                categoryID={this.props.category.id}
+                onComplete={this.props.expenseCreate}
+                toggle={this.toggleExpense}/> :
+              undefined
           }
 
             {this.props.expenses[this.props.category.id].length ?

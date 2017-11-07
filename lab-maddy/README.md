@@ -13,6 +13,14 @@ To confirm things are rendering in the chrome browser, type this in terminal:
 npm run watch
 ```
 
+#### Notes to myself:
+- Currying-- binds the first two arguments with the third. This is currying. 1st- state 2nd- dipatch and getState 3rd- . Bind methods.
+
+```js
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);
+```
+
+
 ## Learning Objectives
 * We will be able to use redux with react
 * We will be able to design redux reducers for controlling application state

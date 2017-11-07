@@ -13,7 +13,6 @@ class CategoryItem extends React.Component {
     return (
       <div className="category-item">
           <button className="remove" onClick={() => this.props.categoryDelete(this.props.category)}>X</button>
-          <button onClick={this.toggleCategory}>edit category</button>
           <h3>{this.props.category.title}</h3>
 
             <CategoryForm

@@ -7,11 +7,14 @@ import createAppStore from '../../lib/store';
 const store = createAppStore();
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
     store.subscribe(() => {
-      // console.log('__STATE__', store.getState());
+      console.log('__STATE__', store.getState());
     });
-
     store.dispatch({ type: null });
   }
 

@@ -18,13 +18,13 @@ class CategoryForm extends React.Component {
   }
 
   handleChange(e) {
-    this.setState ({ title: e.target.value }); 
+    this.setState ({ title: e.target.value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
     this.props.onComplete(Object.assign({}, this.state));
-    this.props.toggle();
+    this.setState({title: ''});
   }
 
   render() {

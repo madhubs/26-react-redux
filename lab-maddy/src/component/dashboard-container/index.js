@@ -1,7 +1,7 @@
 import React from 'react';
 import './dashboard-container.scss';
 import {connect} from 'react-redux';
-import {categoryCreate} from '../../action/category-actions';
+import {categoryCreate, categoryUpdate, categoryDelete} from '../../action/category-actions';
 import CategoryForm from '../category-form';
 import CategoryItem from '../category-item';
 

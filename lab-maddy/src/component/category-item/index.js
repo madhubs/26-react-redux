@@ -28,6 +28,7 @@ class CategoryItem extends React.Component {
 
 
   render() {
+    let {category, categoryUpdate, categoryDelete, expense, expenses} = this.props;
     return (
       <div className="category-item">
         <div className="content-container">
@@ -66,9 +67,9 @@ class CategoryItem extends React.Component {
   }
 }
 
-let mapStateToProps = state => {
+let mapStateToProps = (state, props) => {
   return {
-    expenses: state.expenses,
+    expenses: state.expenses[props.category.id],
   };
 };
 

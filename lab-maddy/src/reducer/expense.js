@@ -1,6 +1,6 @@
 let expenseValidate = expense => {
-  let {id, categoryID, price, content, timestamp} = expense;
-  if(!id || !categoryID || !price || !content || !timestamp) {
+  let {id, categoryId, price, content, timestamp} = expense;
+  if(!id || !categoryId || !price || !content || !timestamp) {
     throw new Error('VALIDATION FAILED: Expense must contain id, catId, title, ...');
   }
 };
@@ -13,27 +13,26 @@ export default (state=initialState, action) => {
   switch (type) {
   case 'CATEGORY_CREATE':
     return {...state, [payload.id] : []};
-
   case 'CATEGORY_DELETE':
-    return {...state, [payload.id] : undefined};
+    return {...state, [payload.id] : null};
 
   case 'EXPENSE_CREATE':
     expenseValidate(payload);
-    let {categoryID} = payload;
-    let categoryExpense = state[categoryID];
-    return {...state, [categoryID]: [...categoryExpense, payload]};
+    let {categoryId} = payload;
+    let categoryExpense = state[categoryId];
+    return {...state, [categoryId]: [...categoryExpense, payload]};
 
   case 'EXPENSE_UPDATE':
     expenseValidate(payload);
-    categoryID = payload.categoryID;
-    categoryExpense = state[categoryID];
-    return {...state, [categoryID]: categoryExpense.map(expense => expense.id === payload.id ? payload : expense)};
+    categoryId = payload.categoryId;
+    categoryExpense = state[categoryId];
+    return {...state, [categoryId]: categoryExpense.map(expense => expense.id === payload.id ? payload : expense)};
 
   case 'EXPENSE_DELETE':
     expenseValidate(payload);
-    categoryID = payload.categoryID;
-    categoryExpense = state[categoryID];
-    return {...state, [categoryID]: categoryExpense.filter(expense => expense.id !== payload.id)};
+    categoryId = payload.categoryId;
+    categoryExpense = state[categoryId];
+    return {...state, [categoryId]: categoryExpense.filter(expense => expense.id !== payload.id)};
 
   default:
     return state;

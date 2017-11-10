@@ -21,7 +21,7 @@ class DashboardContainer extends React.Component {
           onComplete={this.props.categoryCreate}/>
 
         <div className="category-list">
-        {this.props.categories.length ?
+         {this.props.categories.length ?
           <div>
             {this.props.categories.map(item => {
               return <CategoryItem

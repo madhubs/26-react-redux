@@ -3,15 +3,11 @@ import './dashboard-container.scss';
 import {connect} from 'react-redux';
 import CategoryForm from '../category-form';
 import CategoryItem from '../category-item';
-import {
-  categoryCreate,
-  categoryUpdate,
-  categoryDelete,
-} from '../../action/category-actions';
+import {categoryCreate} from '../../action/category-actions';
 
 class DashboardContainer extends React.Component {
   componentDidMount() {
-    console.log('__DASHBOARD__', this.props);
+    console.log('__DASHBOARD__', this);
   }
 
   render() {
@@ -25,22 +21,23 @@ class DashboardContainer extends React.Component {
           onComplete={this.props.categoryCreate}/>
 
         <div className="category-list">
-          {this.props.categories.map((item) => {
-            console.log(item, 'thisisitem');
-            return (
-             <CategoryItem
-               key={item.id}
-               category={item}
-             />
-            );
-          }
-          )}
+
+        {this.props.categories.length ?
+          <div>
+            {this.props.categories.map(item => {
+              return <CategoryItem
+                key={item.id}
+                category = {item}/>;
+            })}
+          </div> :
+
+          <h2>Add some categories</h2>
+        }
         </div>
       </main>
     );
   }
 }
-
 
 const mapStateToProps = state => {
   return {
@@ -51,8 +48,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, getState) => {
   return {
     categoryCreate: category => dispatch(categoryCreate(category)),
-    categoryUpdate: category => dispatch(categoryUpdate(category)),
-    categoryDelete: category => dispatch(categoryDelete(category)),
+
   };
 };
 

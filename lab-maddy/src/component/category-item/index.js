@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import ExpenseForm from '../expense-form';
 import ExpenseItem from '../expense-item';
 import CategoryForm from '../category-form';
-import {expenseCreate} from '../../action/expense-actions';
+import {expenseUpdate, expenseDelete, expenseCreate} from '../../action/expense-actions';
 import {categoryUpdate, categoryDelete} from '../../action/category-actions';
 
 class CategoryItem extends React.Component {

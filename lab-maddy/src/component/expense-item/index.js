@@ -2,13 +2,13 @@ import './expense-item.scss';
 import React from 'react';
 import {connect} from 'react-redux';
 import ExpenseForm from '../expense-form';
-import {expenseUpdate, expenseDelete} from '../../action/expense-actions.js';
+import {expenseCreate, expenseUpdate, expenseDelete} from '../../action/expense-actions';
 
 class ExpenseItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editCard: false,
+      editExpense: false,
     };
     this.toggleExpense = this.toggleExpense.bind(this);
   }
@@ -19,11 +19,8 @@ class ExpenseItem extends React.Component {
     });
   }
   render() {
-
-
     return (
-      <div className='expenseItem'>
-
+      <div className="expenseItem" id= {this.props.expense.id}>
         <div className='expense-content'>
           <h3>{this.props.expense.title}</h3><br/>
           <p>{this.props.expense.price}</p><br/>

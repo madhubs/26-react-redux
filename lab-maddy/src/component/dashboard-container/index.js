@@ -21,16 +21,14 @@ class DashboardContainer extends React.Component {
           onComplete={this.props.categoryCreate}/>
 
         <div className="category-list">
-
-        {this.props.categories.length ?
+         {this.props.categories.length ?
           <div>
             {this.props.categories.map(item => {
               return <CategoryItem
-                key={item.id}
-                category = {item}/>;
+                        key={item.id}
+                        category = {item}/>;
             })}
           </div> :
-
           <h2>Add some categories</h2>
         }
         </div>
@@ -48,7 +46,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, getState) => {
   return {
     categoryCreate: category => dispatch(categoryCreate(category)),
-
   };
 };
 

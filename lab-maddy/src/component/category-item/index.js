@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import ExpenseForm from '../expense-form';
 import ExpenseItem from '../expense-item';
 import CategoryForm from '../category-form';
-import {expenseUpdate, expenseDelete, expenseCreate} from '../../action/expense-actions';
+import {expenseCreate} from '../../action/expense-actions';
 import {categoryUpdate, categoryDelete} from '../../action/category-actions';
 
 class CategoryItem extends React.Component {
@@ -28,13 +28,12 @@ class CategoryItem extends React.Component {
 
 
   render() {
-    let {category, categoryUpdate, categoryDelete, expense, expenses} = this.props;
     return (
       <div className="category-item">
         <div className="content-container">
           <button className="remove" onClick={() => this.props.categoryDelete(this.props.category)}>X</button>
           <button onClick={this.toggleCategory}>edit category</button>
-           <button onClick={this.toggleExpense}>new expense</button>
+          <button onClick={this.toggleExpense}>new expense</button>
           <h3>{this.props.category.title}</h3>
 
           {this.state.categoryForm ?
@@ -46,11 +45,11 @@ class CategoryItem extends React.Component {
             undefined
           }
           </div>
-          <div className='content-container'>
+          <div className="content-container">
             {this.state.expenseForm ?
               <ExpenseForm
-                buttonText='Create'
-                categoryID={this.props.category.id}
+                buttonText="Create an expense"
+                categoryId={this.props.category.id}
                 onComplete={this.props.expenseCreate}
                 toggle={this.toggleExpense}/> :
               undefined
@@ -67,9 +66,9 @@ class CategoryItem extends React.Component {
   }
 }
 
-let mapStateToProps = (state, props) => {
+let mapStateToProps = state => {
   return {
-    expenses: state.expenses[props.category.id],
+    expenses: state.expenses,
   };
 };
 

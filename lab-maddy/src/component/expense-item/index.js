@@ -2,7 +2,7 @@ import './expense-item.scss';
 import React from 'react';
 import {connect} from 'react-redux';
 import ExpenseForm from '../expense-form';
-import {expenseCreate, expenseUpdate, expenseDelete} from '../../action/expense-actions';
+import {expenseUpdate, expenseDelete} from '../../action/expense-actions';
 
 class ExpenseItem extends React.Component {
   constructor(props) {
@@ -14,13 +14,12 @@ class ExpenseItem extends React.Component {
   }
 
   toggleExpense() {
-    this.setState({
-      editExpense: !this.state.editExpense,
-    });
+    this.setState({editExpense: !this.state.editExpense});
   }
-  rrender() {
+
+  render() {
     return (
-      <div className = "expense-item" id= {this.props.expense.id}>
+      <section className = "expense-item" id= {this.props.expense.id}>
         <button className="remove" onClick = {() => this.props.expenseDelete(this.props.expense)}>Delete</button>
         <button onClick={this.toggleExpense}>edit expense</button>
         <h3>{this.props.expense.title}</h3>
@@ -35,16 +34,18 @@ class ExpenseItem extends React.Component {
         :
         undefined
       }
-      </div>
+      </section>
     );
   }
 }
 
 let mapStateToProps = () => ({});
 
-let mapDispatchToProps = (dispatch, getState) => ({
-  expenseUpdate: expense => dispatch(expenseUpdate(expense)),
-  expenseDelete: expense => dispatch(expenseDelete(expense)),
-});
+let mapDispatchToProps = (dispatch, getState) => {
+  return {
+    expenseUpdate: expense => dispatch(expenseUpdate(expense)),
+    expenseDelete: expense => dispatch(expenseDelete(expense)),
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpenseItem);

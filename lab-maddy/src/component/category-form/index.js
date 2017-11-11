@@ -22,17 +22,16 @@ class CategoryForm extends React.Component {
     this.setState ({ [e.target.name] : e.target.value });
   }
 
+//will work on the budget functionality later
   handleSubmit(e) {
     e.preventDefault();
     this.props.onComplete({...this.state});
-    this.setState({title:'', budget:0});
+    this.setState({title:'', budget: ''});
   }
 
   render() {
     return (
       <form className="category-form" onSubmit={this.handleSubmit}>
-
-      <h3>Create an Expense item below:</h3>
 
       <input
       type="text"
@@ -42,9 +41,9 @@ class CategoryForm extends React.Component {
       onChange={this.handleChange}/>
 
       <input
-      name='budget'
-      type='number'
-      placeholder='cost'
+      name="budget"
+      type="number"
+      placeholder="cost"
       value={this.state.budget}
       onChange={this.handleChange}/>
 

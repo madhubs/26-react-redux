@@ -20,13 +20,6 @@ class CategoryItem extends React.Component {
             onComplete={this.props.categoryUpdate}
           />
           <button className='deleteButton' onClick={()=>this.props.categoryDelete(this.props.category)}>X</button>
-          <div className='expense-container'>
-            <ExpenseForm
-              categoryID={category.id}
-              buttonText='Create Expense'
-              onComplete={this.props.expenseCreate}
-            />
-          </div>
         </li>
 
       </section>

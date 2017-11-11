@@ -19,6 +19,7 @@ class DashboardContainer extends React.Component {
     return (
       <main className="dashboard-container">
         <h1>Budget Tracker 5000 Dashboard</h1>
+        <h3>Create an expense item below:</h3>
 
 
         <CategoryForm
@@ -26,7 +27,7 @@ class DashboardContainer extends React.Component {
           onComplete={this.props.categoryCreate} />
         <ul className="categoryList">
           {this.props.categories.map((item) => {
-            
+
             return (
               <CategoryItem
                 key={item.id}

@@ -1,8 +1,7 @@
-import './expense-item.scss';
 import React from 'react';
 import {connect} from 'react-redux';
 import ExpenseForm from '../expense-form';
-import {expenseUpdate, expenseDelete} from '../../action/expense-actions';
+import {expenseUpdate, expenseCreate, expenseDelete} from '../../action/expense-actions';
 
 class ExpenseItem extends React.Component {
   constructor(props) {
@@ -19,7 +18,7 @@ class ExpenseItem extends React.Component {
 
   render() {
     return (
-      <section className = "expense-item" id= {this.props.expense.id}>
+      <div className = "expense-item" id= {this.props.expense.id}>
         <button className="remove" onClick = {() => this.props.expenseDelete(this.props.expense)}>Delete</button>
         <button onClick={this.toggleExpense}>edit expense</button>
         <h3>{this.props.expense.title}</h3>
@@ -28,13 +27,13 @@ class ExpenseItem extends React.Component {
       {this.state.editExpense ?
         <ExpenseForm
         buttonText ="update"
-        toggle = {this.toggleCard}
+        toggle = {this.toggleExpense}
         onComplete = {this.props.expenseUpdate}
         expense = {this.props.expense}/>
         :
         undefined
       }
-      </section>
+      </div>
     );
   }
 }
@@ -42,7 +41,7 @@ class ExpenseItem extends React.Component {
 let mapStateToProps = () => ({});
 
 let mapDispatchToProps = (dispatch, getState) => {
-  return {
+  return{
     expenseUpdate: expense => dispatch(expenseUpdate(expense)),
     expenseDelete: expense => dispatch(expenseDelete(expense)),
   };

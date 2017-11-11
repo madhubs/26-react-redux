@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 import DashboardContainer from '../dashboard-container';
@@ -22,7 +21,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <section className="expense-list">
+      <section className="budget-tracker">
         <Provider store={store}>
           <BrowserRouter>
             <section>

@@ -3,7 +3,7 @@ import './dashboard-container.scss';
 import {connect} from 'react-redux';
 import CategoryForm from '../category-form';
 import CategoryItem from '../category-item';
-import {categoryCreate} from '../../action/category-actions';
+import {categoryCreate, categoryUpdate, categoryDelete} from '../../action/category-actions';
 
 class DashboardContainer extends React.Component {
   componentDidMount() {
@@ -46,6 +46,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, getState) => {
   return {
     categoryCreate: category => dispatch(categoryCreate(category)),
+    categoryUpdate: category => dispatch(categoryUpdate(category)),
+    categoryDelete: category => dispatch(categoryDelete(category)),
   };
 };
 

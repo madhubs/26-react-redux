@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 import DashboardContainer from '../dashboard-container';
@@ -7,10 +8,15 @@ import createAppStore from '../../lib/store';
 const store = createAppStore();
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
     store.subscribe(() => {
       console.log('__STATE__', store.getState());
     });
+
     store.dispatch({ type: null });
   }
 
